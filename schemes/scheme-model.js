@@ -7,6 +7,7 @@ module.exports = {
     find,
     findById,
     findSteps,
+    add,
 };
 
 //
@@ -35,4 +36,7 @@ function findSteps(id) {
 }
 
 //
-//
+//Insert a new scheme into the database
+function add(scheme) {
+    return db('schemes').insert(scheme);
+}
