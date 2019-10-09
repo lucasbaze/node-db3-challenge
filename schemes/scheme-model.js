@@ -10,10 +10,11 @@ module.exports = {
     add,
     update,
     remove,
+    addStep,
 };
 
 //
-//Return array of all users
+//Return array of all schemes
 function find() {
     return db('schemes');
 }
@@ -43,6 +44,13 @@ function add(scheme) {
     return db('schemes')
         .insert(scheme)
         .then(([id]) => this.findById(id));
+}
+
+//
+//Insert a new step with a project id associated
+async function addStep(step, scheme_id) {
+    await db('steps').insert({ ...step, scheme_id });
+    return this.findSteps(scheme_id);
 }
 
 //
