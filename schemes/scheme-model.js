@@ -8,6 +8,7 @@ module.exports = {
     findById,
     findSteps,
     add,
+    update,
     remove,
 };
 
@@ -42,6 +43,16 @@ function add(scheme) {
     return db('schemes')
         .insert(scheme)
         .then(([id]) => this.findById(id));
+}
+
+//
+//Update a given scheme
+async function update(changes, id) {
+    await db('schemes')
+        .update(changes)
+        .where({ id });
+
+    return this.findById(id);
 }
 
 //
