@@ -16,8 +16,14 @@ module.exports = {
 
 //
 //Return array of all schemes
-function find() {
-    return db('schemes');
+function find(searchString) {
+    let query = db('schemes');
+
+    if (searchString) {
+        return query.where('scheme_name', 'like', `%${searchString}%`);
+    }
+
+    return query;
 }
 
 //
