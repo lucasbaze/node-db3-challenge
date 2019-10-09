@@ -8,6 +8,7 @@ module.exports = {
     findById,
     findSteps,
     add,
+    remove,
 };
 
 //
@@ -41,4 +42,16 @@ function add(scheme) {
     return db('schemes')
         .insert(scheme)
         .then(([id]) => this.findById(id));
+}
+
+//
+//Remove scheme by ID
+async function remove(id) {
+    let schemeToDelete = await db('schemes')
+        .where({ id })
+        .first();
+    await db('schemes')
+        .where({ id })
+        .del();
+    return Promise.resolve(schemeToDelete);
 }
