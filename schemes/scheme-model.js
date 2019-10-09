@@ -30,7 +30,8 @@ function findSteps(id) {
         .select('scheme_name', 'step_number', 'instructions')
         .table('schemes')
         .where('schemes.id', id)
-        .join('steps', 'schemes.id', 'steps.scheme_id');
+        .join('steps', 'schemes.id', 'steps.scheme_id')
+        .orderBy('steps.step_number');
 }
 
 //
