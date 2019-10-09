@@ -11,6 +11,7 @@ module.exports = {
     update,
     remove,
     addStep,
+    getStepsCount,
 };
 
 //
@@ -73,4 +74,15 @@ async function remove(id) {
         .where({ id })
         .del();
     return Promise.resolve(schemeToDelete);
+}
+
+//
+//Get count of steps grouped by scheme
+function getStepsCount() {
+    return db
+        .select('scheme_name')
+        .from('schemes')
+        .join('steps', 'steps.scheme_id', 'schemes.id')
+        .count('scheme_id as steps')
+        .groupBy('scheme_name');
 }
