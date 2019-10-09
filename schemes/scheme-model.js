@@ -38,5 +38,7 @@ function findSteps(id) {
 //
 //Insert a new scheme into the database
 function add(scheme) {
-    return db('schemes').insert(scheme);
+    return db('schemes')
+        .insert(scheme)
+        .then(([id]) => this.findById(id));
 }
